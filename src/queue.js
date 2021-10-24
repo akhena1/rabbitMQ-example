@@ -13,3 +13,15 @@ async function createQueue(channel, queue) {
     return error;
   }
 }
+
+async function sendToQueue(queue, message) {
+  try {
+    const channel = await connect();
+
+    await createQueue(channel, queue);
+
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)));
+  } catch (error) {
+    console.log(error);
+  }
+}
