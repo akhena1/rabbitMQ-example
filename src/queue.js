@@ -5,3 +5,11 @@ async function connect() {
 
   return connection.createChannel();
 }
+
+async function createQueue(channel, queue) {
+  try {
+    await channel.assertQueue(queue, { durable: true });
+  } catch (error) {
+    return error;
+  }
+}
