@@ -25,3 +25,19 @@ async function sendToQueue(queue, message) {
     console.log(error);
   }
 }
+
+async function consume(queue, callback) {
+  try {
+    const channel = await connect();
+
+    await createQueue(channel, queue);
+    await channel.consume(queue, callback, { noAck: true });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+module.exports = {
+  sendToQueue,
+  consume,
+};
