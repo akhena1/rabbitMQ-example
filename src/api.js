@@ -8,10 +8,10 @@ app.use(express.json());
 const router = express.Router();
 
 router.post("/task", (req, res) => {
-  queue.sendToQueue("Fila 1", req.body);
+  queue.sendToQueue("Fila1", req.body);
   res.json({ message: "Your request will be processed!" });
 });
 
 app.use("/", router);
 
-app.listen(3000);
+app.listen(3000, () => console.log("Server running on localhost:3000"));
